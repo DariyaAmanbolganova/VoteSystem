@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title th:text="${title}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+<main role="main" class="container">
+    <div class="container" style="text-align: center">
+        <h3 th:text='${"Информация о Выборе №"+vote.id}'/>
+    </div>
+    <div class="jumbotron">
+        <h3 th:text='${"Vote question: "+vote.questions}'/>
+        <h4 th:text='${"Voted: "+votingService.getVotedCount(vote.id)}'/>
+        <table class="table table-hover table-dark">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Answer</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Voted</th>
+                <th scope="col">Voted By Group</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="el:${vote.answers}">
+                <th><a th:text="${el.id}"/></th>
+                <td th:text="${el.answer}"/>
+                <td><a th:href='${"/admin/votes/"+vote.id+"/update/"+el.id}'><button class="btn btn-primary">Update</button></a></td>
+                <td><a th:href='${"/admin/votes/"+vote.id+"/delete/"+el.id}'><button class="btn btn-danger">Delete</button></a></td>
+                <td th:text="${votingService.getVotedAnswerCount(el.id)}"/>
+                <td><p th:each="group:${groups}" th:if="${votingService.getCountByGroupNameAndVote(group,el.id)>0}" th:text='${group+" : "+votingService.getCountByGroupNameAndVote(group,el.id)}'/></td>
+            </tr>
+            </tbody>
+        </table>
+    <a th:href='${"/admin/votes/"+vote.id+"/add"}'><button class="btn btn-success">Add Answer</button></a>
+</main>
+<footer th:insert="blocks/footer::footer"></footer>
+
+<script>
+    function onInput() {
+        const sb = document.querySelector('#type');
+        window.location.replace(sb.value);
+    }
+</script>
+</body>
+</html>
