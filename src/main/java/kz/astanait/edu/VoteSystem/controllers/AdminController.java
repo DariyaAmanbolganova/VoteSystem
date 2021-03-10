@@ -1,13 +1,12 @@
 package kz.astanait.edu.VoteSystem.controllers;
 
 import kz.astanait.edu.VoteSystem.models.*;
-import kz.astanait.edu.VoteSystem.repo.AnswerRepository;
-import kz.astanait.edu.VoteSystem.repo.UserRepository;
-import kz.astanait.edu.VoteSystem.repo.VoteDBRepository;
-import kz.astanait.edu.VoteSystem.repo.VoteRepository;
+import kz.astanait.edu.VoteSystem.repo.AnswerRepo;
+import kz.astanait.edu.VoteSystem.repo.UserRepo;
+import kz.astanait.edu.VoteSystem.repo.VoteDBRepo;
+import kz.astanait.edu.VoteSystem.repo.VoteRepo;
 import kz.astanait.edu.VoteSystem.services.VotingService;
 import kz.astanait.edu.VoteSystem.threads.VoteSaveThread;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -19,16 +18,16 @@ import org.springframework.web.bind.annotation.*;
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminController {
     @Autowired
-    private UserRepository userRepository;
+    private UserRepo userRepository;
 
     @Autowired
-    private VoteRepository voteRepository;
+    private VoteRepo voteRepository;
 
     @Autowired
-    private AnswerRepository answerRepository;
+    private AnswerRepo answerRepository;
 
     @Autowired
-    private VoteDBRepository voteDBRepository;
+    private VoteDBRepo voteDBRepository;
 
     @Autowired
     private VotingService votingService;
@@ -153,6 +152,20 @@ public class AdminController {
         Vote vote = voteRepository.getById(voteId);
         vote.setQuestions(question);
         voteRepository.save(vote);
+        return "redirect:/admin/votes";
+    }
+
+    @GetMapping("/votes/{voteId}/delete")
+    public String getDeleteVotePage(Model model,@PathVariable long voteId){
+        model.addAttribute("vote",voteRepository.getById(voteId));
+        return "vote-delete-question";
+    }
+
+    @DeleteMapping("/votes/{voteId}/delete")
+    public String deleteVote(@RequestParam String question, Model model,@PathVariable long voteId){
+        Vote vote = voteRepository.getById(voteId);
+        vote.setQuestions(question);
+        voteRepository.deleteById(voteId);
         return "redirect:/admin/votes";
     }
 

@@ -2,9 +2,8 @@ package kz.astanait.edu.VoteSystem.controllers;
 
 import kz.astanait.edu.VoteSystem.models.Role;
 import kz.astanait.edu.VoteSystem.models.User;
-import kz.astanait.edu.VoteSystem.repo.UserRepository;
+import kz.astanait.edu.VoteSystem.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +17,7 @@ import java.util.Collections;
 @Controller
 public class MainController {
     @Autowired
-    private UserRepository userRepository;
+    private UserRepo userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 

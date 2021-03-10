@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Profile Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="css/signin.css">
+    <link rel="stylesheet" href="/style/index.css">
 </head>
+
 <body>
-<header th:insert="blocks/header :: header"></header>
+    <header th:insert="blocks/header :: header"></header>
 
-<div sec:authorize="isAuthenticated()" class="container">
-    <h3  th:text='${"Full Name: "+#authentication.principal.fname+" "+#authentication.principal.lname}'/><br>
-    <h3  th:text='${"Group: "+#authentication.principal.groupName}'/><br>
-    <h3  th:text='${"Born: "+#authentication.principal.born}'/><br>
-    <h3  th:text='${"Interests: "+#authentication.principal.interests}'/><br>
-    <a sec:authorize="hasAuthority('USER')" th:href="@{/user/update/profile}"><button class="btn btn-primary">Update</button></a>
-    <a sec:authorize="hasAuthority('USER')" th:href="@{/user/update/password}"><button class="btn btn-primary">Change Password</button></a>
+    <div sec:authorize="isAuthenticated()" class="container box">
+        <h3 th:text='${"Full Name: "+#authentication.principal.fname+" "+#authentication.principal.lname}'></h3><br>
+        <h3 th:text='${"Group: "+#authentication.principal.groupName}'></h3><br>
+        <h3 th:text='${"Born: "+#authentication.principal.born}'></h3><br>
+        <h3 th:text='${"Interests: "+#authentication.principal.interests}'></h3><br>
+        <a sec:authorize="hasAuthority('USER')" th:href="@{/user/update/profile}"><button class="btn btn-outline-dark">Edit</button></a>
+        <a sec:authorize="hasAuthority('USER')" th:href="@{/user/update/password}"><button class="btn btn-outline-dark">Edit Password</button></a>
 
-    <!--<a sec:authorize="hasAuthority('USER')" th:href="@{/user/password/change}"><button class="btn btn-primary">Change Password</button></a>
+        <!--<a sec:authorize="hasAuthority('USER')" th:href="@{/user/password/change}"><button class="btn btn-primary">Change Password</button></a>
     <a sec:authorize="hasAuthority('USER')" th:href="@{/user/card/add}"><button class="btn btn-primary">Add card</button></a>
     <a sec:authorize="hasAuthority('USER')" th:href="@{/user/transfer}"><button class="btn btn-primary">Transfer Money</button></a>
     <a sec:authorize="hasAuthority('USER')" th:href="@{/user/transfer/my}"><button class="btn btn-primary">Transfer Money to your cards</button></a>
     <a sec:authorize="hasAuthority('USER')"th:href="@{/user/transfer/services}"><button class="btn btn-primary">Pay to services</button></a>
     <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin/users}"><button class="btn btn-primary">Users</button></a>-->
-</div>
-<br>
-<br>
-<div class="container">
-    <div th:each="el:${cards}" class="container">
-        <hr>
-        <h3  th:text='${"Card: "+el.cardNumber}'/><br>
-        <h4 th:text='${"KZT: "+el.cash}'/><br>
-        <h4 th:text='${"USD: "+el.getDollars()}'/><br>
-        <h4 th:text='${"EUR: "+el.getEuro()}'/><br>
-        <a th:href='${"/user/card/"+el.id+"/add"}'><button class="btn btn-success">Add cash</button></a>
-        <a th:href='${"/user/card/"+el.id+"/history"}'><button class="btn btn-success">History</button></a>
     </div>
-</div>
-<footer th:insert="blocks/footer::footer"></footer>
+    <br>
+    <br>
+    <div class="container">
+        <div th:each="el:${cards}" class="container box">
+            <hr>
+            <h3 th:text='${"Card: "+el.cardNumber}'></h3><br>
+            <h4 th:text='${"KZT: "+el.cash}'></h4><br>
+            <h4 th:text='${"USD: "+el.getDollars()}'></h4><br>
+            <h4 th:text='${"EUR: "+el.getEuro()}'></h4><br>
+            <a th:href='${"/user/card/"+el.id+"/add"}'><button class="btn btn-outline-info">Add cash</button></a>
+            <a th:href='${"/user/card/"+el.id+"/history"}'><button class="btn btn-outline-info">History</button></a>
+        </div>
+    </div>
 </body>
+
 </html>

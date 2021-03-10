@@ -1,19 +1,23 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
+
     <title>Update Answer</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/style/index.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+
 <body>
 
-<header th:insert="blocks/header :: header"></header>
-<div class="container">
-    <form method="post" th:action='@{/admin/votes/}+${vote.id+"/update/"+answer.id}'>
-        <input type="text" name="answerText" th:value="${answer.answer}" placeholder="Answer" required class="form-control"><br>
-       <button type="submit" class="btn btn-primary">Update</button>
-    </form>
-</div>
-<footer th:insert="blocks/footer::footer"></footer>
+    <header th:insert="blocks/header :: header"></header>
+    <div class="container">
+        <form class="form-style" method="post" th:action='@{/admin/votes/}+${vote.id+"/update/"+answer.id}'>
+            <input type="text" name="answerText" th:value="${answer.answer}" placeholder="answer" required class="form-control"><br>
+            <button type="submit" class="btn btn-outline-light">Edit answer</button>
+        </form>
+    </div>
 </body>
+
 </html>

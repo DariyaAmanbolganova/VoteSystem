@@ -1,23 +1,22 @@
 package kz.astanait.edu.VoteSystem.services;
 
-import kz.astanait.edu.VoteSystem.models.VoteDB;
-import kz.astanait.edu.VoteSystem.repo.AnswerRepository;
-import kz.astanait.edu.VoteSystem.repo.UserRepository;
-import kz.astanait.edu.VoteSystem.repo.VoteDBRepository;
-import kz.astanait.edu.VoteSystem.repo.VoteRepository;
+import kz.astanait.edu.VoteSystem.repo.AnswerRepo;
+import kz.astanait.edu.VoteSystem.repo.UserRepo;
+import kz.astanait.edu.VoteSystem.repo.VoteDBRepo;
+import kz.astanait.edu.VoteSystem.repo.VoteRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class VotingService {
     @Autowired
-    private UserRepository userRepository;
+    private UserRepo userRepository;
     @Autowired
-    private VoteRepository voteRepository;
+    private VoteRepo voteRepository;
     @Autowired
-    private VoteDBRepository voteDBRepository;
+    private VoteDBRepo voteDBRepository;
     @Autowired
-    private AnswerRepository answerRepository;
+    private AnswerRepo answerRepository;
 
     public boolean isVoted(Long userId,Long voteId){
         if(voteDBRepository.existsByVoteIdAndUserId(voteId,userId)){

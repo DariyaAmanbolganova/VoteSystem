@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Registr Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="css/signin.css">
+    <link rel="stylesheet" href="/style/index.css">
+    <link rel="stylesheet" href="/style/login.css">
 </head>
+
 <body>
-<header th:insert="blocks/header :: header"></header>
-<div class="container">
-    <h1>Добавить пользователя</h1>
-    <form th:action="@{/reg}" th:object="${user}" method="post">
-        <input type="text" class="form-control" placeholder="username" th:field="*{username}" required name="username"/><br>
-        <input type="password" class="form-control" placeholder="password" th:field="*{password}" required name="password"/><br>
-        <input type="text" class="form-control" placeholder="First Name" th:field="*{fname}" required name="fname"/><br>
-        <input type="text" class="form-control" placeholder="Last Name" th:field="*{lname}" required name="lname"/><br>
-        <input type="text" class="form-control" placeholder="Group Name" th:field="*{groupName}" required><br>
-        <input type="date" class="form-control" placeholder="Born Date" th:field="*{born}" required><br>
-        <input type="text" class="form-control" placeholder="Interests" th:field="*{interests}" required><br>
-        <button type="submit" class="btn btn-success">Submit</button>
-    </form>
-</div>
-<footer th:insert="blocks/footer::footer"></footer>
+    <header th:insert="blocks/header :: header"></header>
+    <div class="container">
+        <form th:action="@{/reg}" class="login-form" th:object="${user}" method="post">
+            <h4 class="text-center text-white">Registration</h4>
+
+            <input type="text" class="form-control" placeholder="Create username" th:field="*{username}" required name="username" /><br>
+            <input type="password" class="form-control" placeholder="Create password" th:field="*{password}" required name="password" /><br>
+            <input type="text" class="form-control" placeholder="First name" th:field="*{fname}" required name="fname" /><br>
+            <input type="text" class="form-control" placeholder="Last name" th:field="*{lname}" required name="lname" /><br>
+            <input type="text" class="form-control" placeholder="Group name" th:field="*{groupName}" required><br>
+            <input type="date" class="form-control" placeholder="Birthday" th:field="*{born}" required><br>
+            <input type="text" class="form-control" placeholder="Your interests" th:field="*{interests}" required><br>
+            <button type="submit" class="btn btn-outline-light">Sign up</button>
+        </form>
+    </div>
 </body>
+
 </html>

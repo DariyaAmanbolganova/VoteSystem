@@ -1,0 +1,21 @@
+html,
+body {
+    background: url(https://tengrinews.kz/userdata/images/u38/cc5bd571ee700e4722419aa1673379b0.png)center/ cover no-repeat;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #433935;
+    background-color: #433935c9;
+    border-radius: 14px;
+    width: 500px;
+    padding: 2% 1.5%;
+    margin: 1% auto;
+}
+
+.login-form input,
+.login-form button {
+    width: 90%;
+    margin: 0 auto;
+}

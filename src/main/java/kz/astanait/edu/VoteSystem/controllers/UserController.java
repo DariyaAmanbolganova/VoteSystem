@@ -2,10 +2,10 @@ package kz.astanait.edu.VoteSystem.controllers;
 
 import kz.astanait.edu.VoteSystem.models.User;
 import kz.astanait.edu.VoteSystem.models.VoteDB;
-import kz.astanait.edu.VoteSystem.repo.AnswerRepository;
-import kz.astanait.edu.VoteSystem.repo.UserRepository;
-import kz.astanait.edu.VoteSystem.repo.VoteDBRepository;
-import kz.astanait.edu.VoteSystem.repo.VoteRepository;
+import kz.astanait.edu.VoteSystem.repo.AnswerRepo;
+import kz.astanait.edu.VoteSystem.repo.UserRepo;
+import kz.astanait.edu.VoteSystem.repo.VoteDBRepo;
+import kz.astanait.edu.VoteSystem.repo.VoteRepo;
 import kz.astanait.edu.VoteSystem.services.VotingService;
 import kz.astanait.edu.VoteSystem.threads.VoteThread;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,22 +24,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepo userRepository;
 
     @Autowired
-    private AnswerRepository answerRepository;
+    private AnswerRepo answerRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private VoteRepository voteRepository;
+    private VoteRepo voteRepository;
 
     @Autowired
     private VotingService votingService;
 
     @Autowired
-    private VoteDBRepository voteDBRepository;
+    private VoteDBRepo voteDBRepository;
 
     @GetMapping("/profile")
     public String getUserProfile(Model model){

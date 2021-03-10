@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Update Profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style/index.css">
     <link href="css/signin.css">
 </head>
+
 <body>
-<header th:insert="blocks/header :: header"></header>
-<div class="container">
-    <form th:action="@{/user/update/profile}"  method="post">
-        <h3 th:text='${"Update Profile for User:" +oldUser.fname+" "+oldUser.lname}'/>
-        <input class="form-control" type="text" name="fname" th:value="${oldUser.fname}"><br>
-        <input class="form-control" type="text" name="lname" th:value="${oldUser.lname}"><br>
-        <input class="form-control" type="text" name="interests" th:value="${oldUser.interests}"><br>
-        <input class="form-control" type="text" name="groupName" th:value="${oldUser.groupName}"><br>
-        <input class="form-control" type="date" name="born" th:value="${#dates.format(oldUser.born, 'yyyy-MM-dd')}"><br>
-        <button type="submit" class="btn btn-success">Change</button>
-    </form>
-</div>
-<footer th:insert="blocks/footer::footer"></footer>
+    <header th:insert="blocks/header :: header"></header>
+    <div class="container">
+        <form class="form-style" th:action="@{/user/update/profile}" method="post">
+            <h3 th:text='${"Update Profile for User:" +oldUser.fname+" "+oldUser.lname}'></h3>
+            <input class="form-control" type="text" name="fname" th:value="${oldUser.fname}" placeholder="first name"><br>
+            <input class="form-control" type="text" name="lname" th:value="${oldUser.lname}" placeholder="last name"><br>
+            <input class="form-control" type="text" name="interests" th:value="${oldUser.interests}" placeholder="interests"><br>
+            <input class="form-control" type="text" name="groupName" th:value="${oldUser.groupName}" placeholder="group"><br>
+            <input class="form-control" type="date" name="born" th:value="${#dates.format(oldUser.born, 'yyyy-MM-dd')}" placeholder="birthday"><br>
+            <button type="submit" class="btn btn-outline-light form-bth">Edit profile</button>
+        </form>
+    </div>
 </body>
+
 </html>

@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import javax.transaction.Transactional;
 import java.util.List;
 
-public interface VoteDBRepository extends CrudRepository<VoteDB,Long> {
+public interface VoteDBRepo extends CrudRepository<VoteDB,Long> {
     @Transactional
     void deleteAllByAnswerId(Long answerId);
 

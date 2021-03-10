@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Voting Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="css/signin.css">
+    <link rel="stylesheet" href="/style/index.css">
 </head>
+
 <body>
-<header th:insert="blocks/header :: header"></header>
-<div class="container">
-    <div th:each="el:${votes}">
-    <form  th:if="${votingService.isVoted(#authentication.principal.id,el.id)==false}"  th:action='${"/user/votes/"}'  method="post">
-        <h3 th:text='${"Vote for:" +el.questions}'/>
-        <div th:each="answer:${el.answers}">
-        <label th:for="${answer.id}" th:text="${answer.answer}"/><br>
-        <input type="radio" class="form-control" th:value="${answer.id}" th:id="${answer.id}" th:name="answerId" /><br>
-        <input type="hidden" name="voteId" th:value="${el.id}">
+    <header th:insert="blocks/header :: header"></header>
+    <div class="container">
+        <div th:each="el:${votes}">
+            <form class="form-style" th:if="${votingService.isVoted(#authentication.principal.id,el.id)==false}" th:action='${"/user/votes/"}' method="post">
+                <h3 th:text='${"Vote for:" +el.questions}'></h3>
+                <div th:each="answer:${el.answers}">
+                    <label th:for="${answer.id}" th:text="${answer.answer}"></label><br>
+                    <input type="radio" class="form-control" th:value="${answer.id}" th:id="${answer.id}" th:name="answerId" /><br>
+                    <input type="hidden" name="voteId" th:value="${el.id}">
+                </div>
+                <button type="submit" class="btn btn-outline-light">Vote</button>
+
+            </form>
+            <div th:if="${votingService.isVoted(#authentication.principal.id,el.id)}">
+                <h3 th:text='${"You are already voted for:" +el.questions}'></h3>
+                <h5 th:text='${"Your answer: "+votingService.getAnswer(#authentication.principal.id,el.id)}' />
+            </div>
+            <hr>
         </div>
-        <button type="submit" class="btn btn-success">Vote</button>
-        <br>
-        <br>
-    </form>
-        <div th:if="${votingService.isVoted(#authentication.principal.id,el.id)}">
-            <h3 th:text='${"You are already voted for:" +el.questions}'/>
-            <h5 th:text='${"Your answer: "+votingService.getAnswer(#authentication.principal.id,el.id)}'/>
-        </div>
-        <hr>
     </div>
-</div>
-<footer th:insert="blocks/footer::footer"></footer>
 </body>
+
 </html>

@@ -1,20 +1,23 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <title>Update Vote</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/style/index.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+
 <body>
 
-<header th:insert="blocks/header :: header"></header>
-<div class="container">
-    <form th:object="${voteOld}" th:action="@{/admin/votes/}+${voteOld.id}+@{/update}" method="post">
-        <input class="form-control" th:value="${voteOld.questions}"  th:id="questions" th:name="questions" required placeholder="Вопрос"><br>
-        <input class="form-control" th:each="el:${voteOld.answers}" th:value="${el.answer}" th:id='${"answers["+counter.get()+"].answer"}' th:name='${"answers["+counter.get()+"].answer"}' >
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
-</div>
-<footer th:insert="blocks/footer::footer"></footer>
+    <header th:insert="blocks/header :: header"></header>
+    <div class="container">
+        <form class="form-style" th:object="${voteOld}" th:action="@{/admin/votes/}+${voteOld.id}+@{/update}" method="post">
+            <input class="form-control" th:value="${voteOld.questions}" th:id="questions" th:name="questions" required placeholder="question"><br>
+            <input class="form-control" th:each="el:${voteOld.answers}" th:value="${el.answer}" th:id='${"answers["+counter.get()+"].answer"}' placeholder="answer" th:name='${"answers["+counter.get()+"].answer"}'>
+            <button type="submit" class="btn btn-outline-light mt-3">Edit vote</button>
+        </form>
+    </div>
 </body>
+
 </html>

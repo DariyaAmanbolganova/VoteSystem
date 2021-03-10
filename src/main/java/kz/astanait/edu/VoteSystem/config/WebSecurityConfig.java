@@ -22,15 +22,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserService userService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Bean
-    public PasswordEncoder getPasswordEncoder(){
+    public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder(8);
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/css/**","/users/add","/","/fonts/**","/images/**","/js/**","/vendor/**","/reg").permitAll()
+                .antMatchers(
+                        "/resources/**",
+                        "/templates/**",
+                        "/style/**",
+                        "/*.css",
+                        "/css/**",
+                        "/users/add",
+                        "/",
+                        "/fonts/**",
+                        "/images/**",
+                        "/js/**",
+                        "/vendor/**",
+                        "/reg").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
